@@ -58,13 +58,13 @@ module.exports.run = function (runOptions) {
                 return check_reqs.check_ios_deploy();
             }
         }).then(function () {
-            if (useDevice) { // ignore runOptions.nobuild for device because `xcodebuild build` is necessary instead of `xcodebuild archive`.
+            if (useDevice) { // for device
                 if (!runOptions['nobuild-device']) {
-                    return build.run({...runOptions, ...{ buildFlag: 'CONFIGURATION_BUILD_DIR=' + path.join(projectPath, 'build', 'device-run'), buildAction: 'build' }});
+                    return build.run(Object.assign({}, runOptions, {buildFlag: 'CONFIGURATION_BUILD_DIR=' + path.join(projectPath, 'build', 'device-run'), buildAction: 'build' }));
                 } else {
                     return Q.resolve();
                 }
-            }
+            } // for emulator
             if (!runOptions.nobuild) {
                 return build.run(runOptions);
             } else {
