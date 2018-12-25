@@ -60,7 +60,7 @@ module.exports.run = function (runOptions) {
         }).then(function () {
             if (useDevice) { // for device
                 if (!runOptions['nobuild-device']) {
-                    return build.run(Object.assign({}, runOptions, {buildFlag: 'CONFIGURATION_BUILD_DIR=' + path.join(projectPath, 'build', 'device-run'), buildAction: 'build' }));
+                    return build.run(Object.assign({}, runOptions, {buildFlag: 'CONFIGURATION_BUILD_DIR=' + path.join(projectPath, 'build', 'device-run'), buildAction: 'build'}));
                 } else {
                     return Q.resolve();
                 }
